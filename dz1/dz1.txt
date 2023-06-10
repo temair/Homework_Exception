@@ -1,0 +1,118 @@
+public class ExceptionExample {
+    public static int sum2d(String[][] arr) throws NumberFormatException, ArrayIndexOutOfBoundsException {
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < 5; j++) {
+                int val = Integer.parseInt(arr[i][j]);
+                sum += val;
+            }
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        String[][] arr = {{"1", "2", "3", "4", "5"}, {"6", "7", "8", "9", "10"}};
+
+        try {
+            // Вызов метода sum2d с NumberFormatException
+            String[][] invalidArr = {{"1", "2", "3", "4", "5"}, {"6", "7", "8", "9", "ten"}};
+            int result1 = sum2d(invalidArr);
+            System.out.println("Результат 1: " + result1);
+        } catch (NumberFormatException e) {
+            System.out.println("Поймано NumberFormatException: " + e.getMessage());
+        }
+
+        try {
+            // Вызов метода sum2d с ArrayIndexOutOfBoundsException
+            String[][] invalidArr = {{"1", "2", "3", "4", "5"}, {"6", "7", "8"}};
+            int result2 = sum2d(invalidArr);
+            System.out.println("Результат 2: " + result2);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Поймано ArrayIndexOutOfBoundsException: " + e.getMessage());
+        }
+
+        try {
+            // Вызов метода sum2d без генерации исключений
+            int result3 = sum2d(arr);
+            System.out.println("Результат 3: " + result3);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            System.out.println("Поймано исключение: " + e.getMessage());
+        }
+    }
+}
+
+
+public class ArraySubtraction {
+    public static int[] subtractArrays(int[] arr1, int[] arr2) {
+        if (arr1.length != arr2.length) {
+            throw new IllegalArgumentException("Длины массивов не равны");
+        }
+
+        int[] result = new int[arr1.length];
+        for (int i = 0; i < arr1.length; i++) {
+            result[i] = arr1[i] - arr2[i];
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] arr1 = {5, 7, 10};
+        int[] arr2 = {2, 4, 6};
+
+        try {
+            int[] result = subtractArrays(arr1, arr2);
+            System.out.println("Разность массивов: " + Arrays.toString(result));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+
+        int[] arr3 = {1, 2, 3};
+        int[] arr4 = {4, 5, 6, 7};
+
+        try {
+            int[] result = subtractArrays(arr3, arr4);
+            System.out.println("Разность массивов: " + Arrays.toString(result));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+    }
+}
+
+
+public class ArrayDivision {
+    public static int[] divideArrays(int[] arr1, int[] arr2) {
+        if (arr1.length != arr2.length) {
+            throw new RuntimeException("Длины массивов не равны");
+        }
+
+        int[] result = new int[arr1.length];
+        for (int i = 0; i < arr1.length; i++) {
+            result[i] = arr1[i] / arr2[i];
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] arr1 = {10, 20, 30};
+        int[] arr2 = {2, 4, 6};
+
+        try {
+            int[] result = divideArrays(arr1, arr2);
+            System.out.println("Частное массивов: " + Arrays.toString(result));
+        } catch (RuntimeException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+
+        int[] arr3 = {1, 2, 3};
+        int[] arr4 = {4, 5, 0};
+
+        try {
+            int[] result = divideArrays(arr3, arr4);
+            System.out.println("Частное массивов: " + Arrays.toString(result));
+        } catch (RuntimeException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+    }
+}
